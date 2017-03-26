@@ -1,0 +1,16 @@
+<html>
+<head>
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+</head>
+<body>
+    {% block on_page_title %}{% endblock %}
+    <div>
+        {% block content %}{% endblock %}
+    </div>
+    <div>
+        {% block footer %}<hr/>{% endblock %}
+    </div>
+</body>
+</html>

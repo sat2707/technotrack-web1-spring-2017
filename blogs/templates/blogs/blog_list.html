@@ -1,0 +1,17 @@
+
+{% extends 'core/base.html' %}
+
+{% block title %}Список блогов.{% endblock %}
+{% block page_title %}Список блогов.{% endblock %}
+
+{% block content %}
+    <a href="{% url 'home' %}"><h3>Домашняя страница</h3></a>
+    {% for blog in object_list %}
+        <div>
+            <div><a href="{% url 'blogs:blog_details' pk=blog.id %}"><h3>{{ blog.title }}</h3></a></div>
+            <div>{{ blog.text }}</div>
+            <div><small>Владелец: {{ blog.author }}</small></div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

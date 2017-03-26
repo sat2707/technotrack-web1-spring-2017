@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block page_title %}
+    Пост "{{ object.title }}".
+{% endblock %}
+
+{% block content %}
+       <a href="{% url 'blogs:blog_details' object.blog_id %}"><h3>Блог</h3></a>
+       <div style="background: #efe">
+       <div><h2>{{ post.title }}</h2></div>
+       <div><b>{{ post.author }}</b>, {{ post.created_at }}</div>
+       <div><b>Blog: {{ post.blog.title }}</b></div>
+       <div>Last updated on {{ post.updated_at }}</div>
+       <br>
+           <div style="color: blue"><h3>{{ post.text }}</h3></div>
+   </div><br>
+
+   <b>Comments:</b>
+    <div>{{ object.content }}</div>
+    <div>
+        {% include "comments/comments_list.html" with object_list=object.comments.all %}
+    </div>
+
+
+
+
+
+{% endblock %}
