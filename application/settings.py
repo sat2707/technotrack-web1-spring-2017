@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '=tk&_lvfrz#uq+)%0qfng-9#f!@$(2b3(uz3ig=7yryto4%4p1'
+SECRET_KEY = '5i0-04a-m)2kygrk-s%vfuo1d)^=xi&0t9*)2j!t^am8tv^=bn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,8 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'core.apps.CoreConfig',
+    'blogs.apps.BlogsConfig',
+    'comments.apps.CommentsConfig',
 ]
-
+AUTH_USER_MODEL = 'core.User'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/home/foxmi/Документы/mail/WEB/project1/src/media'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -73,22 +78,15 @@ WSGI_APPLICATION = 'application.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#    }
-#}
-
 DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.mysql',
-                'NAME': 'FIRSTBASE',
-                'USER': 'webadmin',
-                'PASSWORD': 'Vbnhbrfc',
-                'HOST': 'localhost',
-                                                            }
-            }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'FIRSTBASE',
+        'USER': 'webadmin',
+        'PASSWORD': 'Vbnhbrfc',
+        'HOST': 'localhost',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators

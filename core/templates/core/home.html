@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Главная страница
+{% endblock %}
+
+{% block on_page_title %}
+    Главная страница
+{% endblock %}
+
+{% block content %}
+    <a href="{% url 'blogs:blog_list' %}"><h3>Список всех блогов</h3></a>
+    <div>Кол-во пользователей: {{ n_users }}</div>
+    <div>Кол-во блогов: {{ n_blogs }}</div>
+    <div>Кол-во постов: {{ n_posts }}</div>
+    <div>Кол-во комментариев: {{ n_comments }}</div>
+{% endblock %}

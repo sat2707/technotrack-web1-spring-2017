@@ -9,8 +9,8 @@
     {% for blog in object_list %}
         <div>
             <div><a href="{% url 'blogs:blog_details' pk=blog.id %}"><h3>{{ blog.title }}</h3></a></div>
-            <div>{{ blog.description }}</div>
-            <div><small>Владелец: {{ blog.owner }}</small></div>
+            <div>{{ blog.text }}</div>
+            <div><small>Владелец: {{ blog.author }}</small></div>
         </div>
     {% endfor %}
 

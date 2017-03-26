@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Блог "{{ object.title }}".
+{% endblock %}
+
+{% block page_title %}
+    Блог "{{ object.title }}".
+{% endblock %}
+
+{% block content %}
+    <h3><a href="{% url 'blogs:blog_list' %}">Список блогов</a></h3>
+    <div>{{ object.text }}</div>
+    {% for post in object.posts.all %}
+        <div>
+            <div>{{ forloop.counter }}: <a href="{% url 'blogs:post_details' pk=post.id %}">{{ post.title }}</a>.</div>
+            <div><small>Автор: {{ post.author }}</small></div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

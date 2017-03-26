@@ -1,0 +1,13 @@
+{% for comment in object_list %}
+    <div style="border: double;">
+        <img src="{{ comment.author.avatar.url }}" width="10%">
+        <div style="display: inline-block">
+            <h4 style="color: #4f4213">
+                ({{ comment.created_at }})
+                <span style="color: #ff764e">{{ comment.author }}:</span> {{ comment.title }}
+            </h4>
+            <div><h3>{{ comment.text }}</h3></div>
+        </div>
+    </div>
+
+{% endfor %}
