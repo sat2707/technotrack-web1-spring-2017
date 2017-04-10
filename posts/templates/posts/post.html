@@ -1,0 +1,36 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="{% url "mainpage" %}">Главная</a></li>
+                <li><a href="{% url "posts:allblogs" %}">Все блоги</a></li>
+                <li><a href="{% url "posts:oneblog" pk=object.blog.id %}">{{ object.blog.title }}</a></li>
+                <li class="active">{{ object.title }}</li>
+            </ol>
+        </div>
+    </div>
+
+    <h3>{{ object.title }}</h3>
+    <p>{{ object.text }}</p>
+
+    <h3>Комментарии</h3>
+
+    <div class="row">
+        {% for comment in object.comment_set.all %}
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p>{{ comment.text }}</p>
+                    </div>
+                    <div class="panel-footer">{{ comment.author.username }}</div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-md-12">Комментариев пока нет</div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

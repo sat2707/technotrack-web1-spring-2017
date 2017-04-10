@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="{% url "mainpage" %}">Главная</a></li>
+                <li><a href="{% url "posts:allblogs" %}">Все блоги</a></li>
+                <li><a href="{% url "posts:oneblog" pk=object.blog.id %}">{{ object.blog.title }}</a></li>
+                <li><a href="{% url "posts:onepost" pk=object.id %}">{{ object.title }}</a></li>
+                <li class="active">Редактирование</li>
+            </ol>
+        </div>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input class="btn btn-info" type="submit" value="Сохранить">
+    </form>
+
+{% endblock %}

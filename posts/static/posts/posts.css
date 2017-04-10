@@ -1,0 +1,14 @@
+        div.blogdiv {
+            margin: 10px;
+            padding: 5px;
+            width:50%; position: relative; border: 1px dashed blue;
+        }
+        div.blogdiv div.editlink {
+            display: none;
+            position: absolute;
+            right: 5px;
+            top: 5px;
+        }
+        div.blogdiv:hover div.editlink {
+            display: block;
+        }

@@ -1,0 +1,41 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="{% url "mainpage" %}">Главная</a></li>
+                <li><a href="{% url "posts:allblogs" %}">Все блоги</a></li>
+                <li class="active">{{ object.title }}</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <p class="well">{{ object.description }}</p>
+        </div>
+    </div>
+
+    <h3>Посты</h3>
+
+    <div class="row">
+        {% for post in object.post_set.all %}
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <a href="{% url "posts:onepost" pk=post.id %}">{{ post.title }}</a>
+                        <p>{{ post.text }}</p>
+                        {% if post.author == user %}
+                            <div class="editlink"><a href="{% url "posts:editpost" pk=post.id %}">Редактировать</a></div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-md-12">Постов пока нет</div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

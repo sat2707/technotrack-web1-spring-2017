@@ -1,0 +1,22 @@
+{% extends "core/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="{% url "mainpage" %}">Главная</a></li>
+                <li><a href="{% url "posts:allblogs" %}">Все блоги</a></li>
+                <li class="active">Новый блог</li>
+            </ol>
+        </div>
+    </div>
+
+    <form action="{% url "posts:createblog" %}" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input class="btn" type="submit" value="Добавить">
+    </form>
+{% endblock %}

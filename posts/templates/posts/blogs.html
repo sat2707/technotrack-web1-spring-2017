@@ -1,0 +1,50 @@
+{% extends "core/base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block extra %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="{% url "mainpage" %}">Главная</a></li>
+                <li class="active">Все блоги</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form-inline pull-left" method="get" action="{% url "posts:allblogs" %}">
+                <div class="form-group">
+                    {{ sortform.sort|add_class:"form-control" }}
+                    {{ sortform.search|add_class:"form-control" }}
+                    <input class="btn btn-default" type="submit" value="Искать">
+                </div>
+            </form>
+            <a class="btn btn-info pull-right" href="{% url "posts:createblog" %}">Новый блог</a>
+        </div>
+    </div>
+
+    <h3>Блоги</h3>
+
+    <div class="row">
+        {% for blog in object_list %}
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <a href="{% url "posts:oneblog" pk=blog.id %}">{{ blog.title }}</a>
+                        <p>{{ blog.description }}</p>
+                        {% if blog.author == user %}
+                            <div class="editlink"><a href="{% url "posts:editblog" pk=blog.id %}">Редактировать</a></div>{% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
