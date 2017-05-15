@@ -8,7 +8,7 @@ class Like(models.Model):
 
     created = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
-    post = models.ForeignKey('posts.Post')
+    post = models.ForeignKey('posts.Post', related_name='likes')
 
     class Meta:
         unique_together = ('author', 'post')

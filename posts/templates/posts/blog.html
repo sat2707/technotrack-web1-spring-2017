@@ -30,6 +30,7 @@
                         {% if post.author == user %}
                             <div class="editlink"><a href="{% url "posts:editpost" pk=post.id %}">Редактировать</a></div>
                         {% endif %}
+                        <p class="pull-right"><a class="postLikeLink" href="{% url "posts:onepostlike" pk=post.id %}">{{ post.likes.count }}</a></p>
                     </div>
                 </div>
             </div>

@@ -8,6 +8,7 @@ class Blog(models.Model):
 
     created = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
+    categories = models.ManyToManyField('categories.Category')
     title = models.CharField(max_length=255)
     description = models.TextField()
     rate = models.IntegerField()

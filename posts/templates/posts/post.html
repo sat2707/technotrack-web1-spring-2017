@@ -18,19 +18,7 @@
 
     <h3>Комментарии</h3>
 
-    <div class="row">
-        {% for comment in object.comment_set.all %}
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <p>{{ comment.text }}</p>
-                    </div>
-                    <div class="panel-footer">{{ comment.author.username }}</div>
-                </div>
-            </div>
-        {% empty %}
-            <div class="col-md-12">Комментариев пока нет</div>
-        {% endfor %}
+    <div class="row autoload" data-url="{% url "posts:onepostcomments" pk=object.id %}">
     </div>
 
 {% endblock %}

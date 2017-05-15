@@ -1,8 +1,9 @@
 # coding: utf-8
-
-from django.shortcuts import render, redirect, get_object_or_404, resolve_url, reverse
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.contrib.auth.forms import AuthenticationForm
+from django.shortcuts import render, redirect, get_object_or_404, resolve_url, reverse, HttpResponse
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, View
 from .models import Blog, Post
+from likes.models import Like
 from django import forms
 
 
@@ -23,7 +24,7 @@ class UpdateBlog(UpdateView):
 
     template_name = 'posts/editblog.html'
     model = Blog
-    fields = ('title', 'description')
+    fields = ('title', 'description', 'categories')
 
     def get_success_url(self):
         return resolve_url('posts:oneblog', pk=self.object.id)
@@ -49,7 +50,7 @@ class CreateBlog(CreateView):
 
     template_name = 'posts/addblog.html'
     model = Blog
-    fields = ('title', 'description')
+    fields = ('title', 'description', 'categories')
     success_url = '/blogs/'
 
     def get_success_url(self):
@@ -96,3 +97,29 @@ class PostView(DetailView):
 
     queryset = Post.objects.all()
     template_name = 'posts/post.html'
+
+
+class PostCommentsView(DetailView):
+
+    queryset = Post.objects.all()
+    template_name = 'posts/commentsdiv.html'
+
+
+class PostLikeView(View):
+
+    post_object = None
+
+    def dispatch(self, request, pk=None, *args, **kwargs):
+        self.post_object = get_object_or_404(Post, id=pk)
+        return super(PostLikeView, self).dispatch(request, *args, **kwargs)
+
+    def post(self, *args, **kwargs):
+        like = self.post_object.likes.filter(author=self.request.user).first()
+        if like is None:
+            like = Like()
+            like.author = self.request.user
+            like.post = self.post_object
+            like.save()
+        else:
+            like.delete()
+        return HttpResponse(Like.objects.filter(post=self.post_object).count())

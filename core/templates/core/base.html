@@ -7,11 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf" content="{{ csrf_token }}">
 
     <title>Jumbotron Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static "core/bootstrap/dist/css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "core/chosen/chosen.css" %}" rel="stylesheet">
     <link href="{% static "core/base.css" %}" rel="stylesheet">
 
 </head>
@@ -61,5 +63,7 @@
 
 <script src="{% static "core/jquery/dist/jquery.min.js" %}"></script>
 <script src="{% static "core/bootstrap/dist/js/bootstrap.min.js" %}"></script>
+<script src="{% static "core/chosen/chosen.jquery.js" %}"></script>
+<script src="{% static "core/js/base.js" %}"></script>
 </body>
 </html>
